@@ -13,8 +13,7 @@
 //     );
 //   }
 
-// em TypeScript
-import React from 'react';
+// em TypeScript é necessário especificar o tipo com uma interface por exemplo
 import './Home.css';
 
 interface minhaProps {

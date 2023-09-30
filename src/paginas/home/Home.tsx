@@ -14,35 +14,61 @@
 //   }
 
 // em TypeScript é necessário especificar o tipo com uma interface por exemplo
-import { useEffect, useState } from "react";
-import "./Home.css";
+// import { useEffect, useState } from "react";
+// import "./Home.css";
 
-interface minhaProps {
-  title: string;
-  description: string;
-}
+// interface minhaProps {
+//   title: string;
+//   description: string;
+// }
 
-function Home(props: minhaProps) {
-  const [state, setState] = useState("initialState");
-  const [valor, setValor] = useState(0);
+// function Home(props: minhaProps) {
+//   const [state, setState] = useState("initialState");
+//   const [valor, setValor] = useState(0);
+
+//   useEffect(() => {
+//     // código para executar o efeito colateral
+//   }); // }, [dependencias] );
+
+//   function handleClick() {
+//     setValor(valor + 1);
+//   }
+
+//   return (
+//     <>
+//       <div>
+//         <p>O valor é: {valor}</p>
+//         <button onClick={handleClick}>Adicionar 1</button>
+//       </div>
+//       <h2>{props.title}</h2>
+//       <p>{props.description}</p>
+//     </>
+//   );
+// }
+
+// export default Home;
+
+
+//useEffect
+import React, { useState, useEffect } from 'react';
+
+function Home() {
+  const [completed, setCompleted] = useState(false);
+  const [tarefa, setTarefa] = useState('');
 
   useEffect(() => {
-    // código para executar o efeito colateral
-  }); // }, [dependencias] );
-
-  function handleClick() {
-    setValor(valor + 1);
-  }
+    if (completed) {
+      setTarefa('Parabéns! Você concluiu a tarefa!');
+    }
+  }, [completed]);
 
   return (
-    <>
-      <div>
-        <p>O valor é: {valor}</p>
-        <button onClick={handleClick}>Adicionar 1</button>
-      </div>
-      <h2>{props.title}</h2>
-      <p>{props.description}</p>
-    </>
+    <div>
+      <h1>Tarefa</h1>
+      <h3>{tarefa}</h3>
+      <p>Conclua a tarefa</p>
+      <button onClick={() => setCompleted(true)}>Concluir Tarefa</button>
+    </div>
   );
 }
 

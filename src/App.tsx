@@ -1,22 +1,41 @@
 import './App.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Home from './paginas/home/Home';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './paginas/login/Login';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+
+interface User {
+  id: number;
+  name: string;
+}
+
 function App() {
+
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    axios.get<User[]>('https://jsonplaceholder.typicode.com/users')
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
-    <Navbar/>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-      
+     < Login />
     </>
+    // <div>
+    //   <h1>Lista de usuários</h1>
+    //   <ul>
+    //     {users.map(user => (
+    //       <li key={user.id}>{user.name}</li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 }
+
 export default App;
